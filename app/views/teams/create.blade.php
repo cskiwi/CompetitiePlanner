@@ -23,6 +23,9 @@
   {{ Form::label('name', 'Name') }}
   {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
 </div>
+<div>
+
+</div>
 
 
 {{ Form::submit('Create Team!', array('class' => 'btn btn-primary')) }}
