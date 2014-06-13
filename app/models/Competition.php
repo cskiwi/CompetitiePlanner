@@ -27,13 +27,12 @@ class Competition extends Eloquent {
 
     foreach ($this->details as $detail) {
       if ($detail->type == 'single') {
-        if ($detail->winner->club->id == $this->home_team_id) $team1++; else $team2++;
+        $detail->winner     ->club->id == $this->home_team_id ? $team1++ : $team2++;
       } else {
-        if ($detail->winner[0]->club->id == $this->home_team_id) $team1++; else $team2++;
+        $detail->winner[0]  ->club->id == $this->home_team_id ? $team1++ : $team2++;
       }
     }
 
-    // echo 'team1 ' . $team1 . ' team2 ' .$team2;
     if ($team1 == $team2) {
       return null;
     } elseif ($team1 > $team2) return $this->HomeTeam;

@@ -47,15 +47,26 @@
     </div>
 
     <div class="tab-pane " id="competitions">
-      <h3>Competitions</h3>
-      <hr>
-      @foreach ($team->competitions as $comp)
-      <div class="col-xs-6 col-md-3">
-        <a href="{{ URL::route('competitions.show', $comp->id) }} " class="thumbnail">{{$comp->start_date}}</a>
-        <!-- Card template for competition info -->
+      <div class="row">
+        <h3>Upcoming Competition</h3>
+        <hr>
+        @foreach ($team->UpcomingCompetition as $comp)
+        <div class="col-xs-6 col-md-3">
+          <a href="{{ URL::route('competitions.show', $comp->id) }} " class="thumbnail">{{$comp->start_date}}</a>
+          <!-- Card template for competition info -->
+        </div>
+        @endforeach
       </div>
-      @endforeach
-
+      <div class="row">
+        <h3>Passed Competition</h3>
+        <hr>
+        @foreach ($team->PassedCompetition as $comp)
+        <div class="col-xs-6 col-md-3">
+          <a href="{{ URL::route('competitions.show', $comp->id) }} " class="thumbnail">{{$comp->start_date}}</a>
+          <!-- Card template for competition info -->
+        </div>
+        @endforeach
+      </div>
     </div>
     <div class="tab-pane " id="captains">
       <h3>Captains</h3>
