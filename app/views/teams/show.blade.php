@@ -19,12 +19,12 @@
 
 </div>
 
-
 <div class="container">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs">
     <li class="active"><a href="#members" data-toggle="tab">Leden</a></li>
     <li><a href="#competitions" data-toggle="tab">Competities</a></li>
+    <li><a href="#captains" data-toggle="tab">Captains</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -32,7 +32,10 @@
 
     <div class="tab-pane active" id="members">
       <h3>Users
+        @if ($team->captains->contains(Auth::User()))
         <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addUser">Add user</button>
+        <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#deleteUser">delete user</button>
+        @endif
       </h3>
       <hr>
       @foreach ($team->users as $user)
@@ -48,7 +51,18 @@
       <hr>
       @foreach ($team->competitions as $comp)
       <div class="col-xs-6 col-md-3">
-        <a href="#" class="thumbnail">{{$comp->start_date}}</a> <!-- Card template for competition info -->
+        <a href="{{ URL::route('competitions.show', $comp->id) }} " class="thumbnail">{{$comp->start_date}}</a>
+        <!-- Card template for competition info -->
+      </div>
+      @endforeach
+
+    </div>
+    <div class="tab-pane " id="captains">
+      <h3>Captains</h3>
+      <hr>
+      @foreach ($team->captains as $captain)
+      <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">{{$captain->name}}</a> <!-- Card template for competition info -->
       </div>
       @endforeach
 
@@ -58,6 +72,37 @@
 </div>
 
 
+<div class="modal fade" id="deleteUser">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        @if ( ($users = $team->users->lists('name', 'id')) != null)
+        {{ HTML::ul($errors->all()) }}
+
+        {{ Form::open(array('route' => array('teams.deleteUser', $team->id))) }}
+
+        <div class="form-group">
+          {{ Form::select('addUser[]', $users, Input::old('client_id'), array('class' => 'form-control', 'multiple' =>
+          true)) }}
+        </div>
+        @else
+        <div class="form-group">
+          No users in this team!
+        </div>
+
+        @endif
+      </div>
+      <div class="modal-footer">
+        {{ Form::submit('Close', array('class' => 'btn btn-default', 'data-dismiss' => 'modal')) }}
+        {{ Form::submit('Delete user!', array('class' => 'btn btn-danger')) }}
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="addUser">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -78,7 +123,7 @@
         </div>
         @else
         <div class="form-group">
-          All the users are already in this group
+          All the users are already in this team
         </div>
 
         @endif
@@ -94,8 +139,6 @@
 @section('scripts')
 
 <script>
-
-
   $(function () {
     var hash = window.location.hash;
     hash && $('ul.nav a[href="' + hash + '"]').tab('show');

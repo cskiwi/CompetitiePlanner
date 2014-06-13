@@ -9,5 +9,4 @@ class TeamsTableSeeder extends Seeder {
 
     Team::create( [ 'id' => 4, 'name' => 'Gemengd 1', 'club_id' => 1, ] );
   }
-
 }

@@ -21,7 +21,6 @@ class CreateClubsTable extends Migration {
     } );
   }
 
-
   /**
    * Reverse the migrations.
    *
@@ -30,5 +29,4 @@ class CreateClubsTable extends Migration {
   public function down() {
     Schema::drop( 'clubs' );
   }
-
 }

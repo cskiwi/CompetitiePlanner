@@ -25,7 +25,6 @@ class CreateDetailsTable extends Migration {
       $table->integer( 'player4_id' )->unsigned()->index()->nullable();
       $table->foreign( 'player4_id' )->references( 'id' )->on( 'users' )->onDelete( 'cascade' );
 
-
       $table->string( 'set1_score1' )->nullable();
       $table->string( 'set1_score2' )->nullable();
 
@@ -41,7 +40,6 @@ class CreateDetailsTable extends Migration {
     } );
   }
 
-
   /**
    * Reverse the migrations.
    *
@@ -50,5 +48,4 @@ class CreateDetailsTable extends Migration {
   public function down() {
     Schema::drop( 'details' );
   }
-
 }

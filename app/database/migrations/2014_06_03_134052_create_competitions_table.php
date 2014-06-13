@@ -16,14 +16,17 @@ class CreateCompetitionsTable extends Migration {
 
       $table->dateTime( 'start_date' );
       $table->dateTime( 'end_date' );
+      $table->boolean( 'played' )->default( 0 );
 
-      $table->integer( 'team_id' )->unsigned()->index();
-      $table->foreign( 'team_id' )->references( 'id' )->on( 'teams' )->onDelete( 'cascade' );
+      $table->integer( 'home_team_id' )->unsigned()->index();
+      $table->foreign( 'home_team_id' )->references( 'id' )->on( 'teams' )->onDelete( 'cascade' );
+
+      $table->integer( 'guest_team_id' )->unsigned()->index();
+      $table->foreign( 'guest_team_id' )->references( 'id' )->on( 'teams' )->onDelete( 'cascade' );
 
       $table->timestamps();
     } );
   }
-
 
   /**
    * Reverse the migrations.
@@ -33,5 +36,4 @@ class CreateCompetitionsTable extends Migration {
   public function down() {
     Schema::drop( 'competitions' );
   }
-
 }

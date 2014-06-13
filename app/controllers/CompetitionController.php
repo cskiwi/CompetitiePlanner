@@ -1,34 +1,32 @@
 <?php
 
-class ClubController extends \BaseController {
+class CompetitionController extends \BaseController {
 
   /**
    * Display a listing of the resource.
-   * GET /club
+   * GET /competition
    *
    * @return Response
    */
   public function index() {
-    $club = Club::All();
-
-    // show the view and pass the user to it
-    return View::make( 'clubs.index' )
-               ->with( 'clubs', $club );
+    $comps = Competition::All();
+    return View::make( 'competitions.index' )
+               ->with( 'comps', $comps );
   }
 
   /**
    * Show the form for creating a new resource.
-   * GET /club/create
+   * GET /competition/create
    *
    * @return Response
    */
   public function create() {
-    return View::make( 'clubs.create' );
+    //
   }
 
   /**
    * Store a newly created resource in storage.
-   * POST /club
+   * POST /competition
    *
    * @return Response
    */
@@ -38,34 +36,33 @@ class ClubController extends \BaseController {
 
   /**
    * Display the specified resource.
-   * GET /club/{id}
+   * GET /competition/{id}
    *
    * @param  int $id
    * @return Response
    */
   public function show($id) {
-    // get the user
-    $club = Club::find( $id );
-
-    // show the view and pass the user to it
-    return View::make( 'clubs.show' )
-               ->with( 'club', $club );
+    $comp = Competition::find( $id );
+    return View::make( 'competitions.show' )
+               ->with( 'comp', $comp );
   }
 
   /**
    * Show the form for editing the specified resource.
-   * GET /club/{id}/edit
+   * GET /competition/{id}/edit
    *
    * @param  int $id
    * @return Response
    */
   public function edit($id) {
-    //
+    $comp = Competition::find( $id );
+    return View::make( 'competitions.edit' )
+               ->with( 'comp', $comp );
   }
 
   /**
    * Update the specified resource in storage.
-   * PUT /club/{id}
+   * PUT /competition/{id}
    *
    * @param  int $id
    * @return Response
@@ -76,7 +73,7 @@ class ClubController extends \BaseController {
 
   /**
    * Remove the specified resource from storage.
-   * DELETE /club/{id}
+   * DELETE /competition/{id}
    *
    * @param  int $id
    * @return Response

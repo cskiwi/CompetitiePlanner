@@ -21,7 +21,6 @@ class CreateCompetitionUserTable extends Migration {
     } );
   }
 
-
   /**
    * Reverse the migrations.
    *
@@ -30,5 +29,4 @@ class CreateCompetitionUserTable extends Migration {
   public function down() {
     Schema::drop( 'competition_user' );
   }
-
 }

@@ -40,7 +40,19 @@
   <hr>
   @foreach ($user->competitions as $comp)
   <div class="col-xs-6 col-md-3">
-    <a href="#" class="thumbnail">{{$comp->start_date}}</a> <!-- Card template for competitions info -->
+    <a href="{{ URL::route('competitions.show', $comp->id) }}" class="thumbnail">{{$comp->start_date}}</a>
+    <!-- Card template for competitions info -->
+  </div>
+  @endforeach
+</div>
+
+<div class="row">
+  <h3>Captain Of</h3>
+  <hr>
+  @foreach ($user->captainOf as $team)
+  <div class="col-xs-6 col-md-3">
+    <a href="{{ URL::route('teams.show', $team->id) }}" class="thumbnail">{{$team->name}}</a>
+    <!-- Card template for competitions info -->
   </div>
   @endforeach
 </div>

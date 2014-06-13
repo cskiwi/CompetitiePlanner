@@ -15,14 +15,10 @@ class DatabaseSeeder extends Seeder {
     $this->call( 'TeamsTableSeeder' );
 
     $this->call( 'TeamUserTableSeeder' );
-
+    $this->call( 'TeamCaptainTableSeeder' );
 
     $this->call( 'CompetitionsTableSeeder' );
     $this->call( 'DetailsTableSeeder' );
-
-
-    // $this->call('AuthorityTableSeeder');
-
+    // $this->call( 'DetailsTableSeeder' );
   }
-
 }

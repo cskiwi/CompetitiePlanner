@@ -22,7 +22,6 @@ class CreateTeamsTable extends Migration {
     } );
   }
 
-
   /**
    * Reverse the migrations.
    *
@@ -31,5 +30,4 @@ class CreateTeamsTable extends Migration {
   public function down() {
     Schema::drop( 'teams' );
   }
-
 }

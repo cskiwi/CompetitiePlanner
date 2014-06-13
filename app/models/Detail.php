@@ -2,17 +2,25 @@
 
 class Detail extends Eloquent {
   protected $table    = 'details';
-  protected $fillable = [ 'player1_id', 'player2_id', 'player3_id', 'player4_id',
+  protected $fillable = [ 'player1_id',
+                          'player2_id',
+                          'player3_id',
+                          'player4_id',
+                          'set1_score1',
+                          'set1_score2',
+                          'set2_score1',
+                          'set2_score2',
+                          'set3_score1',
+                          'set3_score2',
+                          'competition_id' ];
 
-    'set1_score1', 'set1_score2', 'set2_score1', 'set2_score2', 'set3_score1', 'set3_score2',
-
-    'competition_id' ];
+  protected $visible = [ 'player1_id' ];
 
   public function Competition() {
     return $this->belongsTo( 'Competition' );
   }
 
-  public function Winner() {
+  public function getWinnerAttribute() {
     $setsT1 = 0;
     $setsT2 = 0;
 
@@ -25,7 +33,8 @@ class Detail extends Eloquent {
     if ($this->type == 'single') {
       return User::find( $setsT1 > $setsT2 ? $this->player1_id : $this->player2_id );
     } else {
-      return [ User::find( $setsT1 > $setsT2 ? $this->player1_id : $this->player2_id ), User::find( $setsT1 > $setsT2 ? $this->player3_id : $this->player4_id ) ];
+      return [ User::find( $setsT1 > $setsT2 ? $this->player1_id : $this->player2_id ),
+               User::find( $setsT1 > $setsT2 ? $this->player3_id : $this->player4_id ) ];
     }
   }
 }

@@ -14,7 +14,6 @@ return array(
   */
 
   'default' => 'production',
-
   /*
   |--------------------------------------------------------------------------
   | Remote Server Connections
@@ -28,10 +27,14 @@ return array(
 
   'connections' => array(
 
-    'production' => array( 'host' => '', 'username' => '', 'password' => '', 'key' => '', 'keyphrase' => '', 'root' => '/var/www', ),
+    'production' => array( 'host' => '',
+                           'username' => '',
+                           'password' => '',
+                           'key' => '',
+                           'keyphrase' => '',
+                           'root' => '/var/www', ),
 
   ),
-
   /*
   |--------------------------------------------------------------------------
   | Remote Server Groups

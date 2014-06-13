@@ -7,6 +7,36 @@ class AuthController extends BaseController {
     return Redirect::to( '/' );
   }
 
+  public function login() {
+    return View::make( 'auth.login' );
+  }
+
+  public function checkLogin() {
+    $rules = array( 'user' => 'required|min:3',
+                    'password' => 'required|min:3' );
+
+    $validator = Validator::make( Input::all(), $rules );
+
+    if ($validator->fails()) {
+      return Redirect::back()->withInput()->withErrors( $validator );
+    } else {
+
+      $emailReg = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$^";
+
+      // create our user data for the authentication
+      $userData = [ 'password' => Input::get( 'password' ) ];
+      $userData[( preg_match( $emailReg, Input::get( 'user' ) ) ? 'email' : 'username' )] = Input::get( 'user' );
+
+      // attempt to do the login
+      if (Auth::attempt( $userData, true, true )) {
+        return Redirect::to( '/' );
+      } else {
+        return Redirect::back()
+                       ->withInput( Input::except( 'password' ) )
+                       ->withErrors( array( 'password' => 'Wrong password/username combination' ) );
+      }
+    }
+  }
 
   public function linkLogin($id) {
     echo $id;
@@ -101,7 +131,7 @@ class AuthController extends BaseController {
     if ($user) {
       Auth::login( $user );
     }
-    return Redirect::to( '/' )->with( [ 'error' => $error ] );
 
+    return Redirect::to( '/' )->with( [ 'error' => $error ] );
   }
 }

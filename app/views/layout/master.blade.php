@@ -8,7 +8,11 @@
   {{ HTML::style('/resources/css/cp.css') }}
 </head>
 <body>
+
+
 <div class="container">
+
+
   <div class="navbar navbar-default">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -25,18 +29,17 @@
 
       @if (Auth::check())
       {{--*/ $user = Auth::User() /*--}}
-
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">My club<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{{URL::route('clubs.show', $user->club->id)}}">Overview</a></li>
             <li><a href="#">Upcomming competitions</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Passed competitions</a></li>
             <li class="divider"></li>
-            <li class="dropdown-header">Dropdown header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
+            @foreach($user->teams as $team)
+            <li><a href="{{URL::route('teams.show', $team->id)}}">{{$team->name}}</a></li>
+            @endforeach
           </ul>
         </li>
         <li class="dropdown">
@@ -58,7 +61,7 @@
             <li><a href="{{ Social::login('facebook') }}">Facebook</a></li>
             <li><a href="{{ Social::login('Google') }}">Google</a></li>
             <li class="divider"></li>
-            <li><a href="#">Normal</a></li>
+            <li><a href="{{ URL::route('login') }}">Normal</a></li>
           </ul>
         </li>
       </ul>
@@ -71,6 +74,14 @@
 
 
   <div class="container">
+    @if (Session::has('message'))
+    <div class="alert alert-info">{{ Session::get('message') }}</div>
+    @endif
+
+    @if (Session::has('error'))
+    <div class="alert alert-danger">{{ Session::get('error') }}</div>
+    @endif
+
     @yield('content')
   </div>
 </div>

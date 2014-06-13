@@ -7,10 +7,6 @@
 @stop
 @section('content')
 
-@if (Authority::cannot('read', 'User'))
-Nope
-@endif
-
 <form class="form-horizontal">
   <fieldset>
     <legend>Legend</legend>

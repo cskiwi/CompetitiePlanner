@@ -119,4 +119,18 @@ class TeamController extends \BaseController {
     return Redirect::route( 'teams.show', $id );
   }
 
+  public function deleteUser($id) {
+
+    $team = Team::find( $id );
+    if ($team->captains->contains( Auth::User() )) {
+      foreach (Input::get( 'addUser' ) as $userID) {
+        $user = User::find( $userID );
+
+        if ($user != null && $team != null) $team->users()->detach( $user );
+      }
+    } else {
+      Session::flash( 'error', 'You are not the captain!' );
+    }
+    return Redirect::route( 'teams.show', $id );
+  }
 }

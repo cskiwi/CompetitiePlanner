@@ -9,10 +9,6 @@
 @section('content')
 <h1>All the users</h1>
 
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-
 <table class="table table-striped table-bordered">
   <thead>
   <tr>

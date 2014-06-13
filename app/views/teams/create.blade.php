@@ -25,7 +25,6 @@
 </div>
 
 
-
 {{ Form::submit('Create Team!', array('class' => 'btn btn-primary')) }}
 
 {{ Form::close() }}

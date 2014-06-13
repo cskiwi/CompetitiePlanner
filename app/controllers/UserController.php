@@ -16,7 +16,6 @@ class UserController extends \BaseController {
                ->with( 'users', $users );
   }
 
-
   /**
    * Show the form for creating a new resource.
    *
@@ -26,14 +25,13 @@ class UserController extends \BaseController {
     return View::make( 'users.create' );
   }
 
-
   /**
    * Store a newly created resource in storage.
    *
    * @return Response
    */
   public function store() {
-    $rules = array( 'name' => 'required', 'email' => 'required|email', );
+    $rules = array( 'name' => 'required', 'email' => 'required|email', 'password' => 'required' );
     $validator = Validator::make( Input::all(), $rules );
 
     // process the login
@@ -45,6 +43,7 @@ class UserController extends \BaseController {
       $user = new User;
       $user->name = Input::get( 'name' );
       $user->email = Input::get( 'email' );
+      $user->password = Hash::make(Input::get( 'password' ));
       $user->save();
 
       // redirect
@@ -52,7 +51,6 @@ class UserController extends \BaseController {
       return Redirect::to( 'users' );
     }
   }
-
 
   /**
    * Display the specified resource.
@@ -69,7 +67,6 @@ class UserController extends \BaseController {
                ->with( 'user', $user );
   }
 
-
   /**
    * Show the form for editing the specified resource.
    *
@@ -85,7 +82,6 @@ class UserController extends \BaseController {
                ->with( 'user', $user );
   }
 
-
   /**
    * Update the specified resource in storage.
    *
@@ -95,7 +91,7 @@ class UserController extends \BaseController {
   public function update($id) {
     // validate
     // read more on validation at http://laravel.com/docs/validation
-    $rules = array( 'name' => 'required', 'email' => 'required|email' );
+    $rules = array( 'name' => 'required', 'email' => 'required|email', 'password' => 'required' );
     $validator = Validator::make( Input::all(), $rules );
 
     // process the login
@@ -108,6 +104,7 @@ class UserController extends \BaseController {
       $user = user::find( $id );
       $user->name = Input::get( 'name' );
       $user->email = Input::get( 'email' );
+      $user->password = Hash::make(Input::get( 'password' ));
       $user->save();
 
       // redirect
@@ -115,7 +112,6 @@ class UserController extends \BaseController {
       return Redirect::to( 'users' );
     }
   }
-
 
   /**
    * Remove the specified resource from storage.
@@ -132,6 +128,4 @@ class UserController extends \BaseController {
     Session::flash( 'message', 'Successfully deleted the user!' );
     return Redirect::to( 'users' );
   }
-
-
 }
