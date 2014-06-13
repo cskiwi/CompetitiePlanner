@@ -25,7 +25,8 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment( array( 'local'      => array( 'GlennLompeLaptop' ),
-                                       'production' => array( 'Glenn-Vasten', 'GlennZenbook' ) ) );
+                                       'local2'      => array( 'GlennZenbook' ),
+                                       'production' => array( 'Glenn-Vasten' ) ) );
 
 /*
 |--------------------------------------------------------------------------
