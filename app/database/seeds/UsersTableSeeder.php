@@ -7,6 +7,7 @@ class UsersTableSeeder extends Seeder {
                     'username' => 'cskiwi',
                     'name' => 'Glenn Latomme',
                     'email' => 'glenn.latomme@gmail.com',
+                    'password' => Hash::make( 'test' ),
                     'facebook_id' => '10202184924280245',
                     'google_id' => '100086312067632213642',
                     'club_id' => 1,
