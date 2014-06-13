@@ -24,7 +24,7 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment( array( 'local' => array( 'competitieplanner.be' ),
+$env = $app->detectEnvironment( array( 'local'      => array( 'GlennLompeLaptop' ),
                                        'production' => array( 'comp-planner.be' ) ) );
 
 /*
