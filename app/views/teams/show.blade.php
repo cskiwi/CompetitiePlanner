@@ -29,19 +29,15 @@
   <div class="tab-content">
 
     <div class="tab-pane active" id="members">
-      <h3>Users
+      <div class="row">
         @if ($team->captains->contains(Auth::User()))
         <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addUser">Add user</button>
         <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#deleteUser">delete user</button>
         @endif
-      </h3>
-      <hr>
-      @foreach ($team->users as $user)
-      <div class="col-xs-6 col-md-3">
-        <a href="{{ URL::route('users.show', $user->id) }}" class="thumbnail">{{$user->name}}</a>
-        <!-- Card template for user info -->
+        @foreach ($team->users as $user)
+        @include('partials.user', array('user' => $user))
+        @endforeach
       </div>
-      @endforeach
     </div>
 
     <div class="tab-pane " id="competitions">
@@ -56,7 +52,7 @@
         <h3>Passed Competition</h3>
         <hr>
         @foreach ($team->PassedCompetition as $comp)
-          @include('partials.comp', array('comp' => $comp))
+        @include('partials.comp', array('comp' => $comp))
         @endforeach
       </div>
     </div>

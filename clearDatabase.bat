@@ -1,2 +1,2 @@
-php artisan migrate:refresh --env=local
-php artisan db:seed --env=local
+php artisan migrate:refresh
+php artisan db:seed
