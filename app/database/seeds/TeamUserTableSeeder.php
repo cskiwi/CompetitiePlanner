@@ -21,6 +21,10 @@ class TeamUserTableSeeder extends Seeder {
                   [ 'team_id' => 4, 'user_id' => 7, ],
                   [ 'team_id' => 4, 'user_id' => 9, ],
 
+                  [ 'team_id' => 6, 'user_id' => 1, ],
+                  [ 'team_id' => 6, 'user_id' => 14, ],
+
+
       ] );
   }
 }

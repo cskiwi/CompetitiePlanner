@@ -11,15 +11,37 @@
   <div class="container">
 
     <div class="col-md-12">
-      <div class="col-sm-12 col-md-5"><h2>{{ $comp->HomeTeam->club->name }}</h2> <br /> <h4>{{$comp->HomeTeam->name}}</h4></div>
+      <div class="col-sm-12 col-md-5"><h2>
+          <a href="{{ URL::route('clubs.show', $comp->HomeTeam->club->id) }}">
+            {{ $comp->HomeTeam->club->name }}
+          </a>
+        </h2>
+        <br/>
+        <a href="{{ URL::route('teams.show', $comp->HomeTeam->id) }}">
+          <h4>{{$comp->HomeTeam->name}}</h4>
+        </a>
+      </div>
       <div class="col-sm-12 col-md-2"><h1>vs</h1></div>
-      <div class="col-sm-12 col-md-5"><h2>{{ $comp->GuestTeam->club->name }}</h2> <br /> <h4>{{$comp->GuestTeam->name}}</h4></div>
+      <div class="col-sm-12 col-md-5">
+        <h2>
+          <a href="{{ URL::route('clubs.show', $comp->GuestTeam->club->id) }}">
+            {{ $comp->GuestTeam->club->name }}
+          </a>
+        </h2>
+        <br/>
+        <a href="{{ URL::route('teams.show', $comp->GuestTeam->id) }}">
+          <h4>{{$comp->GuestTeam->name}}</h4>
+        </a>
+      </div>
     </div>
 
     <p>
       @if ($comp->played)
       @if ( $comp->winner )
-      <strong>Winner:</strong> {{ $comp->winner->club->name }}
+      <strong>Winner:</strong>
+      <a href="{{ URL::route('clubs.show', $comp->winner->club->id) }}">
+        {{ $comp->winner->club->name }}
+      </a>
       @else
       <strong>Winner:</strong> Draw
 

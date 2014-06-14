@@ -33,7 +33,7 @@ class Team extends Eloquent {
   public function getUpcomingCompetitionAttribute() {
     return $this->Competitions->filter( function($comp) {
       $now = ( new DateTime )->format( 'Y-m-d H:i:s' );
-      if  ($comp >= $now)
+      if  ($comp->start_date >= $now)
         return true;
     });
 
@@ -44,7 +44,7 @@ class Team extends Eloquent {
     // return $this->Competitions->where( 'start_date', '<=', ( new DateTime )->format( 'Y-m-d H:i:s' ) )->get();
     return $this->Competitions->filter( function($comp) {
       $now = ( new DateTime )->format( 'Y-m-d H:i:s' );
-      if  ($comp <= $now)
+      if  ($comp->start_date < $now)
         return true;
     });}
 
