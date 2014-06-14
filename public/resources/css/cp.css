@@ -1,3 +1,21 @@
 a {
     text-decoration: none !important;
 }
+
+.pic {
+    width: 120px;
+    height: 120px;
+}
+
+.content {
+    margin-top: 38px;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+}
+
+.nav-tabs {
+    text-align:center;
+}

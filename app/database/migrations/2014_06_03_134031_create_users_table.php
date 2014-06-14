@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration {
       $table->string( 'facebook_id' );
       $table->string( 'twitter_id' );
       $table->string( 'google_id' );
+      $table->string('photo')->nullable();
+      $table->string('cover')->nullable();
 
       $table->enum( 'loginMethod', [ 'facebook', 'twitter', 'google', 'link', 'normal' ] )->nullable();
 

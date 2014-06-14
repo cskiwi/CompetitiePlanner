@@ -82,6 +82,13 @@ class AuthController extends BaseController {
           if ($user->facebook_id == $loginInfo->id) {
             // all good
             $user->loginMethod = 'facebook';
+
+            $facebook_detail = Social::facebook('me?fields=cover,id');
+
+            // var_dump($facebook_detail); die();
+              $user->cover =$facebook_detail->cover->source;
+              $user->photo = 'https://graph.facebook.com/'.$facebook_detail->id.'/picture?type=large';
+
             $user->save();
           } else {
             // Other user trying to access this one

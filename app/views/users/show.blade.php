@@ -7,54 +7,55 @@
 @stop
 
 @section('content')
-<h1>User info</h1>
-
 <div class="jumbotron text-center">
-  <h2>{{ $user->name }}</h2>
+  <div class="container">
 
-  <p>
-    <strong>Email:</strong> {{ $user->email }}<br>
-    <strong>Club:</strong> <a href="{{ URL::Route('clubs.show', $user->club->id) }}">{{ $user->club->name }}</a><br>
-  </p>
-  <table class="table">
-    <thead>
-    <tr>
-      <td>Single</td>
-      <td>Double</td>
-      <td>Mix</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>{{ $user->single }}</td>
-      <td>{{ $user->double }}</td>
-      <td>{{ $user->mix }}</td>
-    </tr>
-    </tbody>
-  </table>
+    @if($user->photo)
+    <img src="{{$user->photo}}" name="img" class="img-circle pic"></a>
+    @endif
+    <h2>{{ $user->name }}</h2>
+
+    <p>
+      <strong>Email:</strong> {{ $user->email }}<br>
+      <strong>Club:</strong> <a href="{{ URL::Route('clubs.show', $user->club->id) }}">{{ $user->club->name }}</a><br>
+    </p>
+    <table class="table">
+      <thead>
+      <tr>
+        <td>Single</td>
+        <td>Double</td>
+        <td>&nbsp;&nbsp;Mix&nbsp;</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ $user->single }}</td>
+        <td>{{ $user->double }}</td>
+        <td>{{ $user->mix }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
 </div>
 
-
-<div class="row">
-  <h3>Competities</h3>
-  <hr>
-  @foreach ($user->competitions as $comp)
-  <div class="col-xs-6 col-md-3">
-    <a href="{{ URL::route('competitions.show', $comp->id) }}" class="thumbnail">{{$comp->start_date}}</a>
-    <!-- Card template for competitions info -->
+<div class="container">
+  <div class="row">
+    <h3>Competities</h3>
+    <hr>
+    @foreach ($user->competitions as $comp)
+    @include('partials.comp', array('comp' => $comp))
+    @endforeach
   </div>
-  @endforeach
-</div>
 
-<div class="row">
-  <h3>Captain Of</h3>
-  <hr>
-  @foreach ($user->captainOf as $team)
-  <div class="col-xs-6 col-md-3">
-    <a href="{{ URL::route('teams.show', $team->id) }}" class="thumbnail">{{$team->name}}</a>
-    <!-- Card template for competitions info -->
+  <div class="row">
+    <h3>Captain Of</h3>
+    <hr>
+    @foreach ($user->captainOf as $team)
+    @include('partials.team', array('team' => $team))
+    @endforeach
   </div>
-  @endforeach
 </div>
 {{ HTML::script('/resources/js/holder.js') }}
 

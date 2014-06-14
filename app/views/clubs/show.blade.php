@@ -7,8 +7,6 @@
 @stop
 
 @section('content')
-<h1>Club info</h1>
-
 <div class="jumbotron text-center">
   <h2>{{ $club->name }}
     <small>( {{ $club->tag }} )</small>
@@ -23,7 +21,7 @@
 
 <div class="container">
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs nav-tabs-google">
     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
     <li><a href="#members" data-toggle="tab">Leden</a></li>
     <li><a href="#teams" data-toggle="tab">Ploegen</a></li>
@@ -36,20 +34,14 @@
       <h3>Teams</h3>
       <hr>
       @foreach ($club->teams as $team)
-      <div class="col-xs-6 col-md-3">
-        <a href="{{ URL::route('teams.show', $team->id) }}" class="thumbnail">{{$team->name}}</a>
-        <!-- Card template for team info -->
-      </div>
+      @include('partials.team', array('team' => $team))
       @endforeach
     </div>
     <div class="tab-pane" id="members">
       <h3>Users</h3>
       <hr>
       @foreach ($club->users as $user)
-      <div class="col-xs-6 col-md-3">
-        <a href="{{ URL::route('users.show', $user->id) }}" class="thumbnail">{{$user->name}}</a>
-        <!-- Card template for user info -->
-      </div>
+      @include('partials.user', array('user' => $user))
       @endforeach
     </div>
 
@@ -58,9 +50,7 @@
       <div class="row">
         <h3>{{$team->name}}</h3>
         @foreach ($team->competitions as $comp)
-        <div class="col-xs-6 col-md-3">
-          <a href="#" class="thumbnail">{{$comp->start_date}}</a> <!-- Card template for competition info -->
-        </div>
+        @include('partials.comp', array('comp' => $comp))
         @endforeach
       </div>
       @endforeach

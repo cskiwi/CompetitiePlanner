@@ -7,26 +7,14 @@
 @stop
 
 @section('content')
-<h1>All the teams</h1>
+<div class="jumbotron text-center">
+  <h2>Teams</h2>
+</div>
+<div class="container">
 
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-
-<table class="table table-striped table-bordered">
-  <thead>
-  <tr>
-    <td>ID</td>
-    <td>Name</td>
-  </tr>
-  </thead>
-  <tbody>
-  @foreach($teams as $value)
-  <tr>
-    <td>{{ $value->id }}</td>
-    <td><a href="{{ URL::Route('teams.show', $value->id) }}">{{ $value->name }} </a></td>
-  </tr>
+  @foreach($teams as $team)
+  @include('partials.team', array('team' => $team))
   @endforeach
-  </tbody>
-</table>
-@stop
+  @stop
+
+</div>

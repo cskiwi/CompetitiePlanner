@@ -7,28 +7,14 @@
 @stop
 
 @section('content')
-<h1>All the users</h1>
+<div class="jumbotron text-center">
+  <h2>Users</h2>
+</div>
+<div class="container">
 
-<table class="table table-striped table-bordered">
-  <thead>
-  <tr>
-    <td>Name</td>
-    <td>Email</td>
-    <td>Single</td>
-    <td>Double</td>
-    <td>Mix</td>
-  </tr>
-  </thead>
-  <tbody>
-  @foreach($users as $value)
-  <tr>
-    <td><a href="{{ URL::route('users.show' , $value->id) }}">{{ $value->name }} </a></td>
-    <td>{{ $value->email }}</td>
-    <td>{{ $value->single }}</td>
-    <td>{{ $value->double }}</td>
-    <td>{{ $value->mix }}</td>
-  </tr>
+  @foreach($users as $user)
+  @include('partials.user', array('user' => $user))
   @endforeach
-  </tbody>
-</table>
-@stop
+  @stop
+
+</div>

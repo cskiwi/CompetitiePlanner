@@ -1,0 +1,21 @@
+a {
+    text-decoration: none !important;
+}
+
+.pic {
+    margin-top: 50px;
+    width: 120px;
+    height: 120px;
+    margin-left: 50px;
+    margin-bottom: -60px;
+}
+
+.name {
+    position: absolute;
+    padding-left: 200px;
+    font-size: 30px;
+}
+
+.cover{
+    margin-bottom: 50px;
+}
