@@ -31,15 +31,11 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane " id="teams">
-      <h3>Teams</h3>
-      <hr>
       @foreach ($club->teams as $team)
       @include('partials.team', array('team' => $team))
       @endforeach
     </div>
     <div class="tab-pane" id="members">
-      <h3>Users</h3>
-      <hr>
       @foreach ($club->users as $user)
       @include('partials.user', array('user' => $user))
       @endforeach
@@ -61,8 +57,8 @@
         <h3>Contact info</h3>
         <hr>
         <address>
-          <strong>Email:</strong> <a href="mailto:#"> name@domain.com</a><br><br>
-          <strong>Phone:</strong> (555)123-4567
+          @if($club->email)<strong>Email:</strong> <a href="mailto:{{$club->email}}">{{$club->email}}</a><br><br> @endif
+          @if($club->phone)<strong>Phone:</strong> {{$club->phone}} @endif
         </address>
       </div>
 

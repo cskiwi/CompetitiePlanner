@@ -33,8 +33,8 @@ class Detail extends Eloquent {
     if ($this->type == 'single') {
       return User::find( $setsT1 > $setsT2 ? $this->player1_id : $this->player2_id );
     } else {
-      return [ User::find( $setsT1 > $setsT2 ? $this->player1_id : $this->player2_id ),
-               User::find( $setsT1 > $setsT2 ? $this->player3_id : $this->player4_id ) ];
+      return [ User::find( $setsT1 > $setsT2 ? $this->player1_id : $this->player3_id ),
+               User::find( $setsT1 > $setsT2 ? $this->player2_id : $this->player4_id ) ];
     }
   }
 }

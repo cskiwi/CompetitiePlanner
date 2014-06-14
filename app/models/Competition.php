@@ -18,7 +18,7 @@ class Competition extends Eloquent {
   }
 
   public function Users() {
-    return $this->belongsToMany( 'User' );
+    return $this->belongsToMany( 'User' )->where('going', '=', 'accepted');
   }
 
   public function getWinnerAttribute() {

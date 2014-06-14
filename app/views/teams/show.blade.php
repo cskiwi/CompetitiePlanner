@@ -14,14 +14,18 @@
     <strong>Players:</strong> {{ $team->Users()->count() }}<br>
     <strong>Club:</strong> <a href="{{ URL::Route('clubs.show', $team->club->id) }}">{{ $team->club->name }}</a><br>
   </p>
-
+  @if ($team->captains->contains(Auth::User()))
+  <button class="btn btn-primary" data-toggle="modal" data-target="#addUser">Add user</button>
+  <button class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">delete user</button>
+  @endif
 </div>
 
 <div class="container">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs nav-tabs-google">
     <li class="active"><a href="#members" data-toggle="tab">Leden</a></li>
-    <li><a href="#competitions" data-toggle="tab">Competities</a></li>
+    <li><a href="#upcomingCompetition" data-toggle="tab">Upcoming Competition</a></li>
+    <li><a href="#passedCompetition" data-toggle="tab">Passed Competition</a></li>
     <li><a href="#captains" data-toggle="tab">Captains</a></li>
   </ul>
 
@@ -29,36 +33,22 @@
   <div class="tab-content">
 
     <div class="tab-pane active" id="members">
-      <div class="row">
-        @if ($team->captains->contains(Auth::User()))
-        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addUser">Add user</button>
-        <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#deleteUser">delete user</button>
-        @endif
         @foreach ($team->users as $user)
         @include('partials.user', array('user' => $user))
         @endforeach
-      </div>
     </div>
 
-    <div class="tab-pane " id="competitions">
-      <div class="row">
-        <h3>Upcoming Competition</h3>
-        <hr>
-        @foreach ($team->UpcomingCompetition as $comp)
-        @include('partials.comp', array('comp' => $comp))
-        @endforeach
-      </div>
-      <div class="row">
-        <h3>Passed Competition</h3>
-        <hr>
-        @foreach ($team->PassedCompetition as $comp)
-        @include('partials.comp', array('comp' => $comp))
-        @endforeach
-      </div>
+    <div class="tab-pane " id="upcomingCompetition">
+      @foreach ($team->UpcomingCompetition as $comp)
+      @include('partials.comp', array('comp' => $comp))
+      @endforeach
+    </div>
+    <div class="tab-pane " id="passedCompetition">
+      @foreach ($team->PassedCompetition as $comp)
+      @include('partials.comp', array('comp' => $comp))
+      @endforeach
     </div>
     <div class="tab-pane " id="captains">
-      <h3>Captains</h3>
-      <hr>
       @foreach ($team->captains as $captain)
       @include('partials.user', array('user' => $captain))
       @endforeach

@@ -10,7 +10,11 @@
     <div class="col-xs-12 col-sm-7">
       <span class="name">{{ $user->name }}</span><br/>
       <span class="club"> <a href="{{ url::route('clubs.show', $user->club->id) }}">{{$user->club->name}}</a> </span><br/>
-      <span class="skills"><small>Single: </small>{{ $user->single }}, <small>Double: </small> {{ $user->double }}, <small>Mix: </small> {{ $user->mix }}</span><br/>
+      <span class="skills">
+        @if ($user->single)<small>Single: </small>{{ $user->single }} @endif
+        @if ($user->double)<small>Double: </small>{{ $user->double }} @endif
+        @if ($user->mix)<small>Mix: </small>{{ $user->mix }}          @endif
+      </span><br/>
     </div>
   </div>
 </a>

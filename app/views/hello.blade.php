@@ -9,13 +9,19 @@
 @section('content')
 <div class="jumbotron text-center">
   <h2>Index</h2>
-  <p>This is some dummy data for a form</p>
 </div>
 <div class="container">
+  <h3>Clubs</h3>
+  <div class="row">
+  @foreach(Club::All() as $club)
+  @include('partials.club', array('club' => $club))
+  @endforeach
+  </div>
 
+  <h3>Form</h3>
+  <p>This is some dummy data for a form</p>
   <form class="form-horizontal">
     <fieldset>
-      <legend>Legend</legend>
       <div class="form-group">
         <label for="inputEmail" class="col-lg-2 control-label">Email</label>
 

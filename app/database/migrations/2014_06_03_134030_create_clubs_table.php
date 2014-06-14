@@ -17,6 +17,9 @@ class CreateClubsTable extends Migration {
       $table->string( 'name', 32 );
       $table->string( 'tag', 32 );
 
+      $table->string( 'email' )->nullable();
+      $table->string( 'phone' )->nullable();
+
       $table->timestamps();
     } );
   }

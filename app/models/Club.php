@@ -2,8 +2,8 @@
 
 class Club extends Eloquent {
   protected $table    = 'clubs';
-  protected $fillable = [ 'name', 'tag' ];
-  protected $visible  = array( 'id', 'name', 'tag' );
+  protected $fillable = [ 'name', 'tag', 'email', 'phone' ];
+  protected $visible  = array( 'name', 'tag', 'email', 'phone' );
 
   public function Teams() {
     return $this->HasMany( 'Team' );

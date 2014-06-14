@@ -2,6 +2,9 @@ a {
     color: #000000;
     text-decoration: none !important;
 }
+select {
+    height: 200px !important;
+}
 
 .pic {
     width: 120px;
@@ -38,12 +41,12 @@ a {
     background-size: cover;
 }
 .user-profile .name{
-    font-size: 23px;
+    font-size: 20px;
 }
 .user-profile .club{
     font-size: 20px;
 }
 
 .tab-content {
-    margin-top: 10px;
+    margin-top: 15px;
 }

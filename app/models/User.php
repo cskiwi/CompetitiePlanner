@@ -29,7 +29,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   public function Competitions() {
-    return $this->belongsToMany( 'Competition' );
+    return $this->belongsToMany( 'Competition' )->where('going', '=', 'accepted');
+  }
+  public function ToAcceptCompetitions() {
+    return $this->belongsToMany( 'Competition' )->where('going', '=', 'unknown');
+  }
+  public function DeniedCompetitions() {
+    return $this->belongsToMany( 'Competition' )->where('going', '=', 'denied');
   }
 
   public function CaptainOf() {
