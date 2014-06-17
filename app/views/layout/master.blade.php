@@ -9,13 +9,14 @@
   <title>Competition planner</title>
   {{ HTML::style('/resources/css/bootstrap.min.css') }}
   {{ HTML::style('/resources/css/todc-bootstrap.min.css') }}
+  {{ HTML::style('/resources/css/font-awesome.min.css') }}
   {{ HTML::style('/resources/css/cp.css') }}
 </head>
 <body>
 
 
-<div class="navbar navbar-toolbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
+<header class="navbar navbar-masthead navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
         <span class="icon-bar"></span>
@@ -43,31 +44,45 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span>
             {{$user->name }}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{{ URL::route('users.show', $user->id) }}">Info</a></li>
             <li class="divider"></li>
             <li><a href="{{URL::route('logout')}}">Logout</a></li>
           </ul>
-          @else
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ Social::login('facebook') }}">Facebook</a></li>
-            <li><a href="{{ Social::login('Google') }}">Google</a></li>
-            <li class="divider"></li>
-            <li><a href="{{ URL::route('login') }}">Normal</a></li>
-          </ul>
         </li>
+        @else
+        <li><a href="{{ Social::login('facebook') }}"><span class="fa fa-facebook"></span></a></li>
+        <li><a href="{{ Social::login('Google') }}"><span class="fa fa-google"></span></a></li>
         @endif
-
       </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form></div>
+
+      @if (!Auth::check())
+
+      {{ Form::open(array('route' => 'login', 'class' => 'navbar-form navbar-right' )) }}
+      <div class="form-group">
+        {{ Form::text('user', null, array('class' => 'form-control', 'placeholder' => 'Username or email')) }}
+      </div>
+      <div class="form-group">
+        {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}
+      </div>
+      {{ Form::submit('Login', array('class' => 'btn btn-primary')) }}
+      {{ Form::close() }}
+      @endif
+
+
+      <form class="navbar-form navbar-left" role="form">
+        <div class="form-group">
+          <input type="text" placeholder="Search" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success"><span class="fa fa-search"></span></button>
+      </form>
+
+
+    </div>
   </div>
-</div>
+</header>
 
 <div class="content">
   <div class="container">
@@ -83,6 +98,7 @@
 </div>
 {{ HTML::script('/resources/js/jquery.min.js') }}
 {{ HTML::script('/resources/js/bootstrap.min.js') }}
+
 @yield('scripts')
 </body>
 </html>

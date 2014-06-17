@@ -29,9 +29,9 @@ class AuthController extends BaseController {
 
       // attempt to do the login
       if (Auth::attempt( $userData, true, true )) {
-        return Redirect::to( '/' );
+        return Redirect::back();
       } else {
-        return Redirect::back()
+        return Redirect::route('login')
                        ->withInput( Input::except( 'password' ) )
                        ->withErrors( array( 'password' => 'Wrong password/username combination' ) );
       }
