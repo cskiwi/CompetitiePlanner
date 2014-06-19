@@ -12,4 +12,7 @@ class Club extends Eloquent {
   public function Users() {
     return $this->hasMany( 'User' );
   }
+  public function admins() {
+    return $this->belongsToMany( 'User', 'club_admin' );
+  }
 }

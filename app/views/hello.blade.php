@@ -12,14 +12,17 @@
 </div>
 <div class="container">
   <h3>Clubs</h3>
-  <div class="row">
-  @foreach(Club::All() as $club)
-  @include('partials.club', array('club' => $club))
-  @endforeach
-  </div>
 
+  <div class="row">
+    @foreach(Club::All() as $club)
+    @include('partials.club', array('club' => $club))
+    @endforeach
+  </div>
+  @if (!App::environment('local'))
   <h3>Form</h3>
+
   <p>This is some dummy data for a form</p>
+
   <form class="form-horizontal">
     <fieldset>
       <div class="form-group">
@@ -98,6 +101,7 @@
       </div>
     </fieldset>
   </form>
+  @endif
 
 </div>
 

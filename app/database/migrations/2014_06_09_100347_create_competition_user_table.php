@@ -13,7 +13,7 @@ class CreateCompetitionUserTable extends Migration {
   public function up() {
     Schema::create( 'competition_user', function (Blueprint $table) {
       $table->increments( 'id' );
-      $table->enum( 'going', [ 'unknown', 'accepted', 'denied' ] )->default( 'unknown' );
+      $table->enum( 'going', [ 'unknown', 'accepted', 'denied' ] )->default( 'accepted' );
       $table->integer( 'competition_id' )->unsigned()->index();
       $table->foreign( 'competition_id' )->references( 'id' )->on( 'competitions' )->onDelete( 'cascade' );
       $table->integer( 'user_id' )->unsigned()->index();

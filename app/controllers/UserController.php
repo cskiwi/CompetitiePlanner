@@ -31,7 +31,11 @@ class UserController extends \BaseController {
    * @return Response
    */
   public function store() {
-    $rules = array( 'name' => 'required', 'email' => 'required|email', 'password' => 'required' );
+    $rules = array(
+      'name' => 'required',
+      'email' => 'required|email',
+      'password' => 'required'
+    );
     $validator = Validator::make( Input::all(), $rules );
 
     // process the login
@@ -43,7 +47,7 @@ class UserController extends \BaseController {
       $user = new User;
       $user->name = Input::get( 'name' );
       $user->email = Input::get( 'email' );
-      $user->password = Hash::make(Input::get( 'password' ));
+      $user->password = Hash::make( Input::get( 'password' ) );
       $user->save();
 
       // redirect
@@ -91,7 +95,11 @@ class UserController extends \BaseController {
   public function update($id) {
     // validate
     // read more on validation at http://laravel.com/docs/validation
-    $rules = array( 'name' => 'required', 'email' => 'required|email', 'password' => 'required' );
+    $rules = array(
+      'name' => 'required',
+      'email' => 'required|email',
+      'password' => 'required'
+    );
     $validator = Validator::make( Input::all(), $rules );
 
     // process the login
@@ -104,7 +112,7 @@ class UserController extends \BaseController {
       $user = user::find( $id );
       $user->name = Input::get( 'name' );
       $user->email = Input::get( 'email' );
-      $user->password = Hash::make(Input::get( 'password' ));
+      $user->password = Hash::make( Input::get( 'password' ) );
       $user->save();
 
       // redirect
@@ -128,4 +136,6 @@ class UserController extends \BaseController {
     Session::flash( 'message', 'Successfully deleted the user!' );
     return Redirect::to( 'users' );
   }
+
+
 }

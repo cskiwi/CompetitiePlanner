@@ -20,6 +20,11 @@ class CreateUsersTable extends Migration {
       $table->string( 'email', 320 );
       $table->string( 'password', 64 );
 
+      $table->integer( 'club_id' )->unsigned()->index()->nullable();
+      $table->char( 'single', 2 );
+      $table->char( 'double', 2 );
+      $table->char( 'mix', 2 );
+
       $table->string( 'facebook_id' );
       $table->string( 'twitter_id' );
       $table->string( 'google_id' );
@@ -28,11 +33,8 @@ class CreateUsersTable extends Migration {
 
       $table->enum( 'loginMethod', [ 'facebook', 'twitter', 'google', 'link', 'normal' ] )->nullable();
 
-      $table->char( 'single', 2 );
-      $table->char( 'double', 2 );
-      $table->char( 'mix', 2 );
 
-      $table->integer( 'club_id' )->unsigned()->index()->nullable();
+
       $table->foreign( 'club_id' )->references( 'id' )->on( 'clubs' )->onDelete( 'cascade' );
 
       $table->timestamps();

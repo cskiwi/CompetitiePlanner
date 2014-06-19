@@ -17,14 +17,14 @@
 
     <p>
       <strong>Email:</strong> {{ $user->email }}<br>
-      <strong>Club:</strong> <a href="{{ URL::Route('clubs.show', $user->club->id) }}">{{ $user->club->name }}</a><br>
+      @if($user->club)<strong>Club:</strong> <a href="{{ URL::Route('clubs.show', $user->club->id) }}">{{ $user->club->name }}</a><br>@endif
     </p>
     <table class="table">
       <thead>
       <tr>
-        <td>Single</td>
-        <td>Double</td>
-        <td>&nbsp;&nbsp;Mix&nbsp;</td>
+        <th class="text-center">Single</th>
+        <th class="text-center">Double</th>
+        <th class="text-center">&nbsp;Mix&nbsp;&nbsp;</th>
       </tr>
       </thead>
       <tbody>
@@ -41,21 +41,22 @@
 </div>
 
 <div class="container">
+  @if($user->club)
   <div class="row">
-    <h3>Competities</h3>
+    <h3>Upcoming Competities</h3>
     <hr>
-    @foreach ($user->competitions as $comp)
+    @foreach ($user->UpcomingCompetitions as $comp)
     @include('partials.comp', array('comp' => $comp))
     @endforeach
   </div>
-
   <div class="row">
-    <h3>Captain Of</h3>
+    <h3>Passed Competities</h3>
     <hr>
-    @foreach ($user->captainOf as $team)
-    @include('partials.team', array('team' => $team))
+    @foreach ($user->PassedCompetitions as $comp)
+    @include('partials.comp', array('comp' => $comp))
     @endforeach
   </div>
+  @endif
 </div>
 {{ HTML::script('/resources/js/holder.js') }}
 

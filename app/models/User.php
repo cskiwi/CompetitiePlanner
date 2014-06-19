@@ -31,6 +31,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   public function Competitions() {
     return $this->belongsToMany( 'Competition' )->where('going', '=', 'accepted');
   }
+  public function UpcomingCompetitions() {
+    return $this->belongsToMany( 'Competition' )->where('going', '=', 'accepted')->where('start_date','>', ( new DateTime )->format( 'Y-m-d H:i:s' ));
+  }
+  public function PassedCompetitions() {
+    return $this->belongsToMany( 'Competition' )->where('going', '=', 'accepted')->where('start_date','<', ( new DateTime )->format( 'Y-m-d H:i:s' ));
+  }
   public function ToAcceptCompetitions() {
     return $this->belongsToMany( 'Competition' )->where('going', '=', 'unknown');
   }
@@ -40,5 +46,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
   public function CaptainOf() {
     return $this->belongsToMany( 'Team', 'team_captain' );
+  }
+  public function AdminOf() {
+    return $this->belongsToMany( 'Club', 'club_admin' );
   }
 }

@@ -16,7 +16,7 @@
   </p>
   @if ($team->captains->contains(Auth::User()))
   <button class="btn btn-primary" data-toggle="modal" data-target="#addUser">Add user</button>
-  <button class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">delete user</button>
+  <button class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">Delete user</button>
   @endif
 </div>
 
@@ -64,7 +64,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Delete user</h4>
       </div>
       <div class="modal-body">
         @if ( ($users = $team->users->lists('name', 'id')) != null)
@@ -95,7 +95,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Add user</h4>
       </div>
       <div class="modal-body">
         @if (($users = $team->club->users()->whereNotIn('id', (($teamUsers = $team->users()->lists('user_id')) != null)
@@ -126,6 +126,10 @@
 @section('scripts')
 
 <script>
+  $(document).ready( function() {
+    $("select").chosen({width: "100%"});
+  });
+
   $(function () {
     var hash = window.location.hash;
     hash && $('ul.nav a[href="' + hash + '"]').tab('show');

@@ -10,6 +10,8 @@
   {{ HTML::style('/resources/css/bootstrap.min.css') }}
   {{ HTML::style('/resources/css/todc-bootstrap.min.css') }}
   {{ HTML::style('/resources/css/font-awesome.min.css') }}
+  {{ HTML::style('/resources/css/chosen.css') }}
+  {{ HTML::style('/resources/css/chosen-bootstrap.css') }}
   {{ HTML::style('/resources/css/cp.css') }}
 </head>
 <body>
@@ -31,6 +33,7 @@
       <ul class="nav navbar-nav navbar-right ">
         @if (Auth::check())
         {{--*/ $user = Auth::User() /*--}}
+        @if($user->club)
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">My club<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -43,6 +46,9 @@
             @endforeach
           </ul>
         </li>
+        @else
+        <li><a href="#">Join / Create club</a></li>
+        @endif
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span>
             {{$user->name }}<b class="caret"></b></a>
@@ -98,6 +104,7 @@
 </div>
 {{ HTML::script('/resources/js/jquery.min.js') }}
 {{ HTML::script('/resources/js/bootstrap.min.js') }}
+{{ HTML::script('/resources/js/chosen.jquery.min.js') }}
 
 @yield('scripts')
 </body>
