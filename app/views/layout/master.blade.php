@@ -78,12 +78,9 @@
       @endif
 
 
-      <form class="navbar-form navbar-left" role="form">
-        <div class="form-group">
-          <input type="text" placeholder="Search" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-success"><span class="fa fa-search"></span></button>
-      </form>
+      <div class="navbar-form navbar-left">
+        <input type="text" placeholder="Search" class="form-control" id="autocomplete">
+      </div>
 
 
     </div>
@@ -105,7 +102,33 @@
 {{ HTML::script('/resources/js/jquery.min.js') }}
 {{ HTML::script('/resources/js/bootstrap.min.js') }}
 {{ HTML::script('/resources/js/chosen.jquery.min.js') }}
+{{ HTML::script('/resources/js/jquery.autocomplete.js') }}
+<script>
 
+  var a = $('#autocomplete').autocomplete({
+    serviceUrl: '/searches',
+    paramName: 'input',
+    categories: true,
+    onSelect: function (value, data) {
+      window.location = value.url;
+    }
+
+  });
+  /*
+
+   $('#autocomplete2').autocomplete({
+   serviceUrl: '/searches',
+   options: {
+   categories: true,
+   lookupLimit: 3
+   },
+   onSelect: function (suggestion) {
+   alert('You selected: ' + suggestion.value + ', ' + suggestion.data + ', ' + suggestion.category);
+   }
+   })
+   ;
+   */
+</script>
 @yield('scripts')
 </body>
 </html>
