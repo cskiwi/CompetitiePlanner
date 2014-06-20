@@ -18,7 +18,7 @@
     @include('partials.club', array('club' => $club))
     @endforeach
   </div>
-  @if (!App::environment('local'))
+  @if (App::environment('local'))
   <h3>Form</h3>
 
   <p>This is some dummy data for a form</p>
