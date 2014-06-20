@@ -106,7 +106,7 @@
 <script>
 
   var a = $('#autocomplete').autocomplete({
-    serviceUrl: '/searches',
+    serviceUrl: "{{ url::to('searches') }}",
     paramName: 'input',
     categories: true,
     onSelect: function (value, data) {
