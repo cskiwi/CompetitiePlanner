@@ -87,6 +87,8 @@
         {{ Form::submit('Close', array('class' => 'btn btn-default', 'data-dismiss' => 'modal')) }}
         {{ Form::submit('Delete user!', array('class' => 'btn btn-danger')) }}
       </div>
+      {{ Form::close() }}
+
     </div>
   </div>
 </div>

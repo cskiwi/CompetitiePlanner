@@ -49,6 +49,10 @@
       @endif
 
     </p>
+
+    @if ($comp->HomeTeam->captains->contains(Auth::User()))
+    <a class="btn btn-primary" href="{{url::route('competitions.edit', $comp->id)}}">Enter results</a>
+    @endif
   </div>
 
 </div>

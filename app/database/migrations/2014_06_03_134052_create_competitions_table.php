@@ -16,7 +16,6 @@ class CreateCompetitionsTable extends Migration {
 
       $table->dateTime( 'start_date' );
       $table->dateTime( 'end_date' );
-      $table->boolean( 'played' )->default( 0 );
 
       $table->integer( 'home_team_id' )->unsigned()->index();
       $table->foreign( 'home_team_id' )->references( 'id' )->on( 'teams' )->onDelete( 'cascade' );

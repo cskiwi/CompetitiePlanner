@@ -1,4 +1,4 @@
-<!-- app/views/users/index.blade.php -->
+  <!-- app/views/users/index.blade.php -->
 @extends('layout.master')
 
 @section('sidebar')

@@ -11,7 +11,6 @@ class CompetitionsTableSeeder extends Seeder {
 
     Competition::create( [ 'start_date' => '2014-06-07 20:00:00',
                            'end_date' => '2014-06-07 22:00:00',
-                           'played' => 1,
                            'home_team_id' => 3,
                            'guest_team_id' => 6 ] );
 

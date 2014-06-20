@@ -79,10 +79,8 @@
 
 
       <div class="navbar-form navbar-left">
-        <input type="text" placeholder="Search" class="form-control" id="autocomplete">
+          <input type="text" placeholder="Search" class="form-control" id="autocomplete">
       </div>
-
-
     </div>
   </div>
 </header>
@@ -109,25 +107,10 @@
     serviceUrl: "{{ url::to('searches') }}",
     paramName: 'input',
     categories: true,
-    onSelect: function (value, data) {
+    onSelect: function (value) {
       window.location = value.url;
     }
-
   });
-  /*
-
-   $('#autocomplete2').autocomplete({
-   serviceUrl: '/searches',
-   options: {
-   categories: true,
-   lookupLimit: 3
-   },
-   onSelect: function (suggestion) {
-   alert('You selected: ' + suggestion.value + ', ' + suggestion.data + ', ' + suggestion.category);
-   }
-   })
-   ;
-   */
 </script>
 @yield('scripts')
 </body>

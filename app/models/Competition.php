@@ -1,9 +1,15 @@
 <?php
 
 class Competition extends Eloquent {
-  protected $table    = 'competitions';
-  protected $fillable = [ 'start_date', 'end_date', 'home_team_id', 'guest_team_id', 'played' ];
-  protected $visible  = [ 'start_date', 'end_date', 'home_team_id', 'guest_team_id', 'played' ];
+  protected $table = 'competitions';
+  protected $fillable = [ 'start_date',
+                          'end_date',
+                          'home_team_id',
+                          'guest_team_id', ];
+  protected $visible = [ 'start_date',
+                         'end_date',
+                         'home_team_id',
+                         'guest_team_id', ];
 
   public function Details() {
     return $this->hasMany( 'Detail' );
@@ -18,7 +24,7 @@ class Competition extends Eloquent {
   }
 
   public function Users() {
-    return $this->belongsToMany( 'User' )->where('going', '=', 'accepted');
+    return $this->belongsToMany( 'User' )->where( 'going', '=', 'accepted' );
   }
 
   public function getWinnerAttribute() {
@@ -26,10 +32,16 @@ class Competition extends Eloquent {
     $team2 = 0;
 
     foreach ($this->details as $detail) {
-      if ($detail->type == 'single') {
-        $detail->winner     ->club->id == $this->home_team_id ? $team1++ : $team2++;
-      } else {
-        $detail->winner[0]  ->club->id == $this->home_team_id ? $team1++ : $team2++;
+      if ($detail->played) {
+        if ($detail->type == 'single') {
+          if ($detail->winner) {
+            $detail->winner     ->club->id == $this->home_team_id ? $team1++ : $team2++;
+          }
+        } else {
+          if ($detail->winner[0]) {
+            $detail->winner[0]  ->club->id == $this->home_team_id ? $team1++ : $team2++;
+          }
+        }
       }
     }
 
@@ -37,6 +49,13 @@ class Competition extends Eloquent {
       return null;
     } elseif ($team1 > $team2) return $this->HomeTeam;
     else return $this->GuestTeam;
+  }
+
+  public function getPlayedAttribute() {
+    foreach ($this->details as $detail) {
+      if ($detail->played == false) return false;
+    }
+    return true;
   }
 
   public static function create(array $attributes) {
@@ -47,6 +66,14 @@ class Competition extends Eloquent {
     }
     foreach ($comp->GuestTeam->users as $user) {
       $comp->users()->attach( $user );
+    }
+
+    // create Details
+    for ($index = 0; $index < 8; $index++) {
+      Detail::create(
+        [ 'type' => ( $index < 4 ) ? 'single' : 'double',
+          'competition_id' => $comp->id ]
+      );
     }
   }
 }

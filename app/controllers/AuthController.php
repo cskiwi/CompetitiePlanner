@@ -4,7 +4,7 @@ class AuthController extends BaseController {
 
   public function logout() {
     Auth::logout();
-    return Redirect::to( '/' );
+    return Redirect::back();;
   }
 
   public function login() {
@@ -12,8 +12,10 @@ class AuthController extends BaseController {
   }
 
   public function checkLogin() {
-    $rules = array( 'user' => 'required|min:3',
-                    'password' => 'required|min:3' );
+    $rules = array(
+      'user' => 'required|min:3',
+      'password' => 'required|min:3'
+    );
 
     $validator = Validator::make( Input::all(), $rules );
 
@@ -31,7 +33,7 @@ class AuthController extends BaseController {
       if (Auth::attempt( $userData, true, true )) {
         return Redirect::back();
       } else {
-        return Redirect::route('login')
+        return Redirect::route( 'login' )
                        ->withInput( Input::except( 'password' ) )
                        ->withErrors( array( 'password' => 'Wrong password/username combination' ) );
       }
@@ -56,6 +58,11 @@ class AuthController extends BaseController {
           if ($user->google_id == $loginInfo->id) {
             // all good
             $user->loginMethod = 'google';
+
+            if ($user->photo == null) {
+              $user->photo = $loginInfo->picture;
+            }
+
             $user->save();
           } else {
             // Other user trying to access this one
@@ -83,12 +90,10 @@ class AuthController extends BaseController {
             // all good
             $user->loginMethod = 'facebook';
 
-            $facebook_detail = Social::facebook('me?fields=cover,id');
-
-            // var_dump($facebook_detail); die();
-              $user->cover =$facebook_detail->cover->source;
-              $user->photo = 'https://graph.facebook.com/'.$facebook_detail->id.'/picture?type=large';
-
+            if ($user->photo == null) {
+              $facebook_detail = Social::facebook( 'me?fields=id' );
+              $user->photo = 'https://graph.facebook.com/' . $facebook_detail->id . '/picture?type=large';
+            }
             $user->save();
           } else {
             // Other user trying to access this one
@@ -139,6 +144,6 @@ class AuthController extends BaseController {
       Auth::login( $user );
     }
 
-    return Redirect::to( '/' )->with( [ 'error' => $error ] );
+    return Redirect::back()->with( [ 'error' => $error ] );
   }
 }

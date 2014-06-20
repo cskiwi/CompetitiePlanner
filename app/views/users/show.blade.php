@@ -57,6 +57,8 @@
     @endforeach
   </div>
   @endif
+  {{ var_dump(Social::google('user')) }}
+
 </div>
 {{ HTML::script('/resources/js/holder.js') }}
 
